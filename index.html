@@ -3,10 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>TODO APP</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <header class="header">
+        <img src="images/logo.svg" alt="logo" />
+      </header>
+      <main id="main">
+        <h1>Welcome to my Breaking Bad api exercise</h1>
+        <div class="container">
+          <div class="container-author">
+            <h2 id="author">Author:</h2>
+          </div>
+          <div class="container-phrase">
+            <p id="quote"></p>
+          </div>
+        </div>
+        <div class="container-buttons">
+          <button id="info">Get quote</button>
+          <button id="save">Save quote</button>
+          <button id="remove">Remove quote</button>
+          <button id="remove-all">Delete My saves</button>
+        </div>
+        <div class="container-filter">
+          <label for="input-name">Find a quote: </label>
+          <input id="search-input" type="search" placeholder="Search by ID" />
+        </div>
+        <div class="container-all-quotes">
+        </div>
+      </main>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
