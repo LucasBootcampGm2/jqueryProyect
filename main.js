@@ -64,10 +64,10 @@ function saveQuoteIntoStorage() {
         existingQuotes.push(newQuote);
 
         localStorage.setItem("quotes", JSON.stringify(existingQuotes));
-        console.log(`Cita guardada: ${text}`);
+        console.log(`Quote saved: ${text}`);
         getAllSavedQuotes();
       } else {
-        console.log(`La cita con ID: ${currentQuoteId} ya está guardada.`);
+        console.log(`The quote with ID: ${currentQuoteId} was already saved.`);
       }
     }
   });
@@ -82,7 +82,7 @@ function removeQuoteFromStorage() {
       );
 
       localStorage.setItem("quotes", JSON.stringify(updatedQuotes));
-      console.log(`Cita eliminada con ID: ${currentQuoteId}`);
+      console.log(`Deleted quote with ID: ${currentQuoteId}`);
       getAllSavedQuotes();
     }
   });
@@ -95,7 +95,7 @@ function getAllSavedQuotes() {
   quotesContainer.css("padding", "30px 0");
 
   const savedQuotes = JSON.parse(localStorage.getItem("quotes")) || [];
-  
+
   if (savedQuotes.length > 0) {
     quotesContainer.append(
       $("<div>").text("ALL SAVED QUOTES").addClass("header")
@@ -104,8 +104,12 @@ function getAllSavedQuotes() {
       const newDiv = $("<div>").addClass("quote-save");
 
       const newId = $("<span>").text(quote.id).addClass("quote-save-span");
-      const newAuthor = $("<span>").text(quote.author).addClass("quote-save-span");
-      const newQuote = $("<span>").text(quote.quote).addClass("quote-save-span");
+      const newAuthor = $("<span>")
+        .text(quote.author)
+        .addClass("quote-save-span");
+      const newQuote = $("<span>")
+        .text(quote.quote)
+        .addClass("quote-save-span");
 
       newDiv.append(newId);
       newDiv.append(newAuthor);
@@ -113,7 +117,7 @@ function getAllSavedQuotes() {
       quotesContainer.append(newDiv);
     });
   } else {
-    quotesContainer.append($("<div>").text("No hay citas guardadas."));
+    quotesContainer.append($("<div>").text("There are no saved quotes."));
   }
 
   $("#main").append(quotesContainer);
@@ -123,7 +127,7 @@ function getAllSavedQuotes() {
 function deleteAllMySaves() {
   $("#remove-all").click(() => {
     localStorage.clear();
-    $(".container-all-quotes").empty().text("No hay citas guardadas.");
+    $(".container-all-quotes").empty().text("There are no saved quotes.");
   });
 }
 
@@ -136,8 +140,8 @@ function searchQuote() {
     const savedQuotes = JSON.parse(localStorage.getItem("quotes")) || [];
 
     if (searchValue) {
-      const filteredQuotes = savedQuotes.filter(
-        (quote) => quote.id.toString().includes(searchValue)
+      const filteredQuotes = savedQuotes.filter((quote) =>
+        quote.id.toString().includes(searchValue)
       );
 
       if (filteredQuotes.length > 0) {
@@ -145,8 +149,12 @@ function searchQuote() {
           const newDiv = $("<div>").addClass("quote-save");
 
           const newId = $("<span>").text(quote.id).addClass("quote-save-span");
-          const newAuthor = $("<span>").text(quote.author).addClass("quote-save-span");
-          const newQuote = $("<span>").text(quote.quote).addClass("quote-save-span");
+          const newAuthor = $("<span>")
+            .text(quote.author)
+            .addClass("quote-save-span");
+          const newQuote = $("<span>")
+            .text(quote.quote)
+            .addClass("quote-save-span");
 
           newDiv.append(newId);
           newDiv.append(newAuthor);
@@ -154,20 +162,22 @@ function searchQuote() {
           quotesContainer.append(newDiv);
         });
       } else {
-        quotesContainer.append($("<div>").text("No se encontraron citas con ese ID."));
+        quotesContainer.append(
+          $("<div>").text("There is not a quote with this ID")
+        );
       }
     } else {
-      getAllSavedQuotes(); 
+      getAllSavedQuotes();
     }
   });
 }
 
 $(window).on("load", () => {
-  getAllSavedQuotes(); 
+  getAllSavedQuotes();
   getRandomQuote();
   clickGetApiButton();
   saveQuoteIntoStorage();
   removeQuoteFromStorage();
   deleteAllMySaves();
-  searchQuote(); 
+  searchQuote();
 });
